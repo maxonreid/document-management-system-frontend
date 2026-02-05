@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/* Lao font support */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* DMS Custom Color Palette */
+    --primary-blue: #0B2F4A;
+    --secondary-blue: #1F4E6D;
+    --accent-gold: #F2B705;
+    --bg-light: #F5F7FA;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B7280;
+    
+    /* Utility colors */
+    --border: #E5E7EB;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: #E5E7EB;
+  }
+  body {
+    @apply bg-background text-text-primary;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-text-primary;
+  }
+  
+  p {
+    @apply text-text-secondary;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary-blue rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-blue;
+}
