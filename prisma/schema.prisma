@@ -1,0 +1,93 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+  VIEWER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  name          String?
+  role          UserRole  @default(USER)
+  active        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  folders       Folder[]
+  documents     Document[]
+  
+  @@map("users")
+}
+
+model Folder {
+  id          String    @id @default(cuid())
+  name        String
+  parentId    String?
+  userId      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent      Folder?   @relation("FolderHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children    Folder[]  @relation("FolderHierarchy")
+  documents   Document[]
+  
+  @@index([userId])
+  @@index([parentId])
+  @@map("folders")
+}
+
+model Document {
+  id            String    @id @default(cuid())
+  filename      String
+  originalName  String
+  filePath      String
+  size          Int
+  mimeType      String
+  thumbnailPath String?
+  folderId      String?
+  userId        String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  folder        Folder?   @relation(fields: [folderId], references: [id], onDelete: SetNull)
+  tags          DocumentTag[]
+  
+  @@index([userId])
+  @@index([folderId])
+  @@map("documents")
+}
+
+model Tag {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  createdAt   DateTime  @default(now())
+  
+  documents   DocumentTag[]
+  
+  @@map("tags")
+}
+
+model DocumentTag {
+  documentId  String
+  tagId       String
+  
+  document    Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  tag         Tag       @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  
+  @@id([documentId, tagId])
+  @@map("document_tags")
+}
