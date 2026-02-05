@@ -1,0 +1,2 @@
+# Placeholder - In production, replace with actual 72x72 PNG icon
+# Use a tool like https://realfavicongenerator.net/ to generate proper PWA icons

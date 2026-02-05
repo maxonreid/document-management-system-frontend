@@ -97,6 +97,14 @@
     "profile": "Profile",
     "users": "Users"
   },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "recentUploads": "Recent Uploads",
+    "last7days": "Last 7 days",
+    "quickActions": "Quick actions to get you started",
+    "recentDocuments": "Recent Documents",
+    "recentDocumentsDescription": "Your recently uploaded or modified documents"
+  },
   "admin": {
     "title": "Admin Panel",
     "users": "Users",

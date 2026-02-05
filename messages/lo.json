@@ -97,6 +97,14 @@
     "profile": "ໂປຣໄຟລ໌",
     "users": "ຜູ້ໃຊ້"
   },
+  "dashboard": {
+    "welcome": "ຍິນດີຕ້ອນຮັບກັບຄືນ",
+    "recentUploads": "ອັບໂຫລດຫຼ້າສຸດ",
+    "last7days": "7 ມື້ຜ່ານມາ",
+    "quickActions": "ການປະຕິບັດດ່ວນເພື່ອເລີ່ມຕົ້ນ",
+    "recentDocuments": "ເອກະສານຫຼ້າສຸດ",
+    "recentDocumentsDescription": "ເອກະສານທີ່ອັບໂຫລດ ຫຼື ແກ້ໄຂຫຼ້າສຸດຂອງທ່ານ"
+  },
   "admin": {
     "title": "ແຜງຄວບຄຸມຜູ້ດູແລ",
     "users": "ຜູ້ໃຊ້",
