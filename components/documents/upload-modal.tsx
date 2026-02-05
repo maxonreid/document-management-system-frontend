@@ -30,6 +30,7 @@ interface UploadModalProps {
   onOpenChange: (open: boolean) => void;
   folders?: Folder[];
   onUploadSuccess?: () => void;
+  defaultFolderId?: string;
 }
 
 export function UploadModal({
@@ -37,17 +38,25 @@ export function UploadModal({
   onOpenChange,
   folders = [],
   onUploadSuccess,
+  defaultFolderId,
 }: UploadModalProps) {
   const t = useTranslations('documents');
   const tCommon = useTranslations('common');
   const [files, setFiles] = React.useState<File[]>([]);
-  const [selectedFolderId, setSelectedFolderId] = React.useState<string>('');
+  const [selectedFolderId, setSelectedFolderId] = React.useState<string>(defaultFolderId || '');
   const [tags, setTags] = React.useState<string>('');
   const [uploading, setUploading] = React.useState(false);
   const [uploadProgress, setUploadProgress] = React.useState<{
     [key: string]: number;
   }>({});
   const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
+
+  // Update selected folder when defaultFolderId changes
+  React.useEffect(() => {
+    if (defaultFolderId) {
+      setSelectedFolderId(defaultFolderId);
+    }
+  }, [defaultFolderId]);
 
   const resetForm = () => {
     setFiles([]);
