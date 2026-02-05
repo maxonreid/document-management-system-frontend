@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Toaster } from 'sonner';
+import { InstallPrompt } from '@/components/install-prompt';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
@@ -35,6 +36,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
           <Toaster position="top-right" richColors />
+          <InstallPrompt />
         </NextIntlClientProvider>
       </body>
     </html>
