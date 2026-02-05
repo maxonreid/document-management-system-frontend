@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { prisma } from './db';
 import { loginSchema } from './validations';
+import { UserRole } from '@prisma/client';
 
 export const authConfig: NextAuthConfig = {
   providers: [
@@ -64,7 +65,7 @@ export const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.role = token.role as any;
+        session.user.role = token.role as UserRole;
         session.user.active = token.active as boolean;
       }
       return session;
