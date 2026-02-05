@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import { folderUpdateSchema } from '@/lib/validations';
+import { ZodError } from 'zod';
 
 export async function GET(
   request: NextRequest,
@@ -223,7 +224,7 @@ export async function PATCH(
   } catch (error) {
     console.error('Error updating folder:', error);
     
-    if (error instanceof Error && error.name === 'ZodError') {
+    if (error instanceof ZodError) {
       return NextResponse.json(
         { error: 'Invalid folder data', details: error },
         { status: 400 }
