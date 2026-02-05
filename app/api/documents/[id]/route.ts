@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { UPLOAD_DIR } from '@/lib/constants';
 
 const updateSchema = z.object({
-  filename: z.string().min(1).optional(),
+  originalName: z.string().min(1).optional(),
   folderId: z.string().nullable().optional(),
   tags: z.array(z.string()).optional(),
 });
@@ -109,7 +109,7 @@ export async function PATCH(
       );
     }
 
-    const { filename, folderId, tags } = validation.data;
+    const { originalName, folderId, tags } = validation.data;
 
     // Check document ownership
     const document = await prisma.document.findFirst({
@@ -146,8 +146,8 @@ export async function PATCH(
     // Update document
     const updateData: any = {};
     
-    if (filename !== undefined) {
-      updateData.filename = filename;
+    if (originalName !== undefined) {
+      updateData.originalName = originalName;
     }
     
     if (folderId !== undefined) {

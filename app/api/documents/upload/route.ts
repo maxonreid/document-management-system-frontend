@@ -11,9 +11,11 @@ import { ALLOWED_FILE_TYPES, ALLOWED_FILE_EXTENSIONS, MAX_FILE_SIZE, UPLOAD_DIR 
 
 // Helper to validate file type
 function validateFileType(file: File): { valid: boolean; error?: string } {
+  const maxSizeMB = MAX_FILE_SIZE / 1024 / 1024;
+  
   // Check file size
   if (file.size > MAX_FILE_SIZE) {
-    return { valid: false, error: `File size exceeds ${MAX_FILE_SIZE / 1024 / 1024}MB limit` };
+    return { valid: false, error: `File size exceeds ${maxSizeMB}MB limit` };
   }
 
   // Check mime type
@@ -141,7 +143,9 @@ export async function POST(request: NextRequest) {
 
     // File path
     const filePath = join(folderDir, filename);
-    const relativeFilePath = join(session.user.id, folderId || '', filename);
+    const relativeFilePath = folderId 
+      ? join(session.user.id, folderId, filename)
+      : join(session.user.id, filename);
 
     // Save file
     const bytes = await file.arrayBuffer();
@@ -156,7 +160,9 @@ export async function POST(request: NextRequest) {
     if (isImage || isPDF) {
       const thumbnailFilename = `thumb_${filename}.jpg`;
       const thumbnailFullPath = join(folderDir, thumbnailFilename);
-      const relativeThumbnailPath = join(session.user.id, folderId || '', thumbnailFilename);
+      const relativeThumbnailPath = folderId
+        ? join(session.user.id, folderId, thumbnailFilename)
+        : join(session.user.id, thumbnailFilename);
 
       try {
         if (isImage) {

@@ -19,4 +19,4 @@ export const FILE_TYPE_LABELS: Record<string, string> = {
 };
 
 export const APP_NAME = 'Document Management System';
-export const UPLOAD_DIR = process.env.UPLOAD_DIR || './uploads';
+export const UPLOAD_DIR = process.env.UPLOAD_DIR || '/tmp/uploads';
