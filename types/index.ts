@@ -1,4 +1,6 @@
-export type { UserRole } from '@prisma/client';
+import { UserRole as PrismaUserRole } from '@prisma/client';
+
+export type UserRole = PrismaUserRole;
 
 export interface User {
   id: string;
@@ -45,5 +47,3 @@ export interface DocumentTag {
   documentId: string;
   tagId: string;
 }
-
-export type UserRole = 'ADMIN' | 'USER' | 'VIEWER';
