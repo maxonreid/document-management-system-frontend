@@ -15,6 +15,7 @@ const nextConfig = {
   images: {
     remotePatterns: [],
   },
+  turbopack: {},
 };
 
 module.exports = withPWA(nextConfig);
