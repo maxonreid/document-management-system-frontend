@@ -79,7 +79,7 @@ export function DashboardClient({ userName }: DashboardClientProps) {
         <Card className="bg-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              Recent Uploads
+              {t('dashboard.recentUploads')}
             </CardTitle>
             <Clock className="h-4 w-4 text-text-secondary" />
           </CardHeader>
@@ -88,7 +88,7 @@ export function DashboardClient({ userName }: DashboardClientProps) {
               {stats.recentUploads}
             </div>
             <p className="text-xs text-text-secondary">
-              Last 7 days
+              {t('dashboard.last7days')}
             </p>
           </CardContent>
         </Card>
@@ -98,7 +98,7 @@ export function DashboardClient({ userName }: DashboardClientProps) {
       <Card className="bg-white">
         <CardHeader>
           <CardTitle className="text-xl">{t('common.actions')}</CardTitle>
-          <CardDescription>Quick actions to get you started</CardDescription>
+          <CardDescription>{t('dashboard.quickActions')}</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-4">
           <Button className="bg-primary-blue hover:bg-secondary-blue text-white">
@@ -118,9 +118,9 @@ export function DashboardClient({ userName }: DashboardClientProps) {
       {/* Recent Documents */}
       <Card className="bg-white">
         <CardHeader>
-          <CardTitle className="text-xl">Recent Documents</CardTitle>
+          <CardTitle className="text-xl">{t('dashboard.recentDocuments')}</CardTitle>
           <CardDescription>
-            Your recently uploaded or modified documents
+            {t('dashboard.recentDocumentsDescription')}
           </CardDescription>
         </CardHeader>
         <CardContent>
